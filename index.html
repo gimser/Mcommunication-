@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mcommunication 3.0 | National Digital Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Leaflet CSS for Real Maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;700;800&family=Noto+Kufi+Arabic:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Noto Kufi Arabic', 'Inter', 'sans-serif'], // Added Arabic font priority
+              display: ['Noto Kufi Arabic', 'Outfit', 'sans-serif'],
+            },
+            colors: {
+              brand: {
+                // GIM Services Identity: Green & Yellow
+                green: '#009746',  // GIM Primary Green
+                yellow: '#FFD100', // GIM Primary Yellow
+                
+                // Government/Functional Colors
+                dark: '#0F172A',   // Slate 900 (Text/Backgrounds)
+                light: '#F8FAFC',  // Slate 50 (Backgrounds)
+                
+                // Moroccan Palette Extensions
+                ochre: '#C15835', // Marrakech Walls
+                majorelle: '#005898', // Majorelle Blue
+                clay: '#E2D1C3', // Traditional Plaster
+                
+                // Compatibility mapping
+                blue: '#009746',   
+                red: '#FFD100',    
+              }
+            },
+            backgroundImage: {
+              'gradient-brand': 'linear-gradient(135deg, #009746 0%, #FFD100 100%)', // Green to Yellow
+              'gradient-dark': 'linear-gradient(to bottom right, #0F172A, #004D24)',
+            },
+            animation: {
+              'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Custom Gradient Text Utility - GIM Identity */
+      .text-gradient {
+        background: linear-gradient(135deg, #009746 0%, #FFD100 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      
+      /* Subtle Background Pattern */
+      .bg-zellige {
+        background-color: #F8FAFC;
+        background-image: radial-gradient(#009746 0.5px, transparent 0.5px), radial-gradient(#009746 0.5px, #F8FAFC 0.5px);
+        background-size: 24px 24px;
+        background-position: 0 0, 12px 12px;
+        opacity: 1;
+      }
+
+      /* MOROCCAN PATTERNS CSS */
+      .pattern-arabesque {
+        background-color: transparent;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0l.83.828-1.415 1.415-.828-.828-.828.828-1.415-1.415.828-.828-.828-.828 1.415-1.415.828.828.828-.828 1.415 1.415-.828.828zM22.485 0l.83.828-1.415 1.415-.828-.828-.828.828-1.415 1.415.828-.828-.828-.828 1.415-1.415.828.828.828-.828 1.415 1.415-.828.828zM0 22.485l.828.83-1.415 1.415-.828-.828-.828.828L-2.83 22.485l.828-.828-.828-.828 1.415-1.415.828.828.828-.828 1.415 1.415-.828.828zM0 54.627l.828.83-1.415 1.415-.828-.828-.828.828L-2.83 54.627l.828-.828-.828-.828 1.415-1.415.828.828.828-.828 1.415 1.415-.828.828zM54.627 60l.83-.828-1.415-1.415-.828.828-.828-.828-1.415 1.415.828.828-.828.828 1.415 1.415.828-.828.828.828 1.415-1.415-.828-.828zM22.485 60l.83-.828-1.415-1.415-.828.828-.828-.828-1.415 1.415.828-.828-.828.828 1.415 1.415.828-.828.828.828 1.415-1.415-.828-.828zM32 32h2v2h-2v-2zm-4-4h2v2h-2v-2zm-4 4h2v2h-2v-2zm4 4h2v2h-2v-2z' fill='%23009746' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+      }
+
+      .pattern-zellige-strip {
+        background: 
+          conic-gradient(at 0% 0%, transparent 270deg, #009746 270deg),
+          conic-gradient(at 100% 0%, transparent 90deg, #FFD100 90deg);
+        background-size: 20px 20px;
+        opacity: 0.1;
+      }
+      
+      /* Smooth Scrolling & Typography */
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "@react-oauth/google": "https://esm.sh/@react-oauth/google@0.12.1?external=react,react-dom",
+    "axios": "https://esm.sh/axios@1.6.2",
+    "leaflet": "https://esm.sh/leaflet@1.9.4"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-zellige text-slate-800 antialiased selection:bg-brand-yellow selection:text-brand-dark">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

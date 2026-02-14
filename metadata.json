@@ -1,0 +1,8 @@
+{
+  "name": "Mcommunication 3.0",
+  "description": "A national digital identity and communication platform bridging government credibility with youth innovation.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
